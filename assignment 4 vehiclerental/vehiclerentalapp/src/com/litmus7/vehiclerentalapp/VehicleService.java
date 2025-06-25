@@ -84,4 +84,17 @@ public class VehicleService {
 			}
 		}
 	}
+
+	/**
+	 * Displays the total amount required to rent all vehicles.
+	 */
+	public double calculateTotalRent() {
+		double totalRent = 0;
+		for (Vehicle vehicle : vehicleList) {
+			if (vehicle.isAvailable()) {
+				totalRent += vehicle.rentalPricePerDay();
+			}
+		}
+		return totalRent;
+	}
 }

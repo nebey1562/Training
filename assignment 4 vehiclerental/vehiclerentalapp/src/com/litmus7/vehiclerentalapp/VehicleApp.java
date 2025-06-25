@@ -59,6 +59,8 @@ public class VehicleApp {
 
 		System.out.println("\nUpdated Details are\n");
 		vehicleService.displayAvailableVehicles();
+		
+		System.out.println("\nTotal rent for all the vehicles are:" + vehicleService.calculateTotalRent() +"\n");
 
 		// via default constructor
 		Car car = new Car();
@@ -70,6 +72,8 @@ public class VehicleApp {
 
 		System.out.println("\nUpdated Details are\n");
 		vehicleService.displayAvailableVehicles();
+		
+		System.out.println("\nTotal rent for all the vehicles are:" + vehicleService.calculateTotalRent() +"\n");
 
 	}
 }

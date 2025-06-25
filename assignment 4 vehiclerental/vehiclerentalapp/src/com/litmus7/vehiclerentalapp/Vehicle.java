@@ -66,9 +66,19 @@ public class Vehicle {
 		System.out.println("Model: " + model);
 		System.out.println("Rental Price per Day: " + rentalPricePerDay);
 	}
-
+	
+	/**
+	 * Returns the boolean value isAvaible for searching and rental calculation
+	 */
 	public boolean isAvailable() {
 		return isAvailable;
+	}
+	
+	/**
+	 * Returns the double value of rental price of vehicle
+	 */
+	public double rentalPricePerDay() {
+		return rentalPricePerDay;
 	}
 
 }
