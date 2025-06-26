@@ -5,7 +5,7 @@ import java.util.List;
 import com.litmus7.vehiclerentalapp.dto.Bike;
 import com.litmus7.vehiclerentalapp.dto.Car;
 import com.litmus7.vehiclerentalapp.dto.Vehicle;
-import com.litmus7.vehiclerentalapp.services.VehicleService;
+import com.litmus7.vehiclerentalapp.service.VehicleService;
 
 /**
  * The {@code VehicleApp} class is the entry point for the Vehicle Rental
