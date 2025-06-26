@@ -1,10 +1,14 @@
-package com.litmus7.vehiclerentalapp;
+package com.litmus7.vehiclerentalapp.services;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.litmus7.vehiclerentalapp.dto.Bike;
+import com.litmus7.vehiclerentalapp.dto.Car;
+import com.litmus7.vehiclerentalapp.dto.Vehicle;
 
 /**
  * Service class responsible for managing a collection of vehicles, including
@@ -27,7 +31,7 @@ public class VehicleService {
 	 *
 	 * @param filePath path to the input file containing vehicle data
 	 */
-	public void loadDataFromFile(String filePath) {
+	public List<Vehicle> dataFromFile(String filePath) {
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -39,6 +43,7 @@ public class VehicleService {
 		} catch (IOException e) {
 			System.out.println("Error reading file: " + e.getLocalizedMessage());
 		}
+		return vehicleList;
 	}
 
 	/**
@@ -75,17 +80,6 @@ public class VehicleService {
 	}
 
 	/**
-	 * Displays the details of all vehicles that are currently available for rent.
-	 */
-	public void displayAvailableVehicles() {
-		for (Vehicle vehicle : vehicleList) {
-			if (vehicle.isAvailable()) {
-				vehicle.displayDetails();
-			}
-		}
-	}
-
-	/**
 	 * Displays the total amount required to rent all vehicles.
 	 */
 	public double calculateTotalRent() {
@@ -97,4 +91,31 @@ public class VehicleService {
 		}
 		return totalRent;
 	}
+	
+	public boolean rentVehicle(Vehicle vehicle) {
+    if (vehicle.isAvailable()) {
+        vehicle.setAvaialble(false);
+        System.out.println("Vehicle rented: " + vehicle.getBrand() + " " + vehicle.getModel());
+        return true;
+    } else {
+        System.out.println("Vehicle already rented");
+        return false;
+    }
+}
+	
+	public List<Vehicle> getVehicleList(){
+		return vehicleList;
+	}
+
+	public Vehicle searchVehicles(String brand, String model) {
+	    for (Vehicle vehicle : vehicleList) {
+	        if (vehicle.getBrand().equalsIgnoreCase(brand) &&
+	            vehicle.getModel().equalsIgnoreCase(model)) {
+	            return vehicle;
+	        }
+	    }
+	    return null;
+	}
+
+	
 }

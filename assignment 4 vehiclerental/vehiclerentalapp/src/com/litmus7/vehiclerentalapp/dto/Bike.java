@@ -1,8 +1,6 @@
-package com.litmus7.vehiclerentalapp;
+package com.litmus7.vehiclerentalapp.dto;
 
 import java.util.Scanner;
-
-import com.litmus7.vehiclerentalapp.Vehicle;
 
 /**
  * Represents a bike, which is a type of Vehicle, with specific attributes like

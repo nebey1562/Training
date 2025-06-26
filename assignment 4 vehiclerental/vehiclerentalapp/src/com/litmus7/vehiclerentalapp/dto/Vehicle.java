@@ -1,4 +1,4 @@
-package com.litmus7.vehiclerentalapp;
+package com.litmus7.vehiclerentalapp.dto;
 
 import java.util.Scanner;
 
@@ -80,5 +80,17 @@ public class Vehicle {
 	public double rentalPricePerDay() {
 		return rentalPricePerDay;
 	}
-
+	
+	public boolean setAvaialble(boolean flag) {
+		this.isAvailable = flag;
+		return isAvailable;
+	}
+	
+	public String getBrand() {
+		return brand;
+	}
+	
+	public String getModel() {
+		return model;
+	}
 }
