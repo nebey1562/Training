@@ -14,6 +14,12 @@ import java.util.Scanner;
  * @version Java 19
  */
 public class Vehicle {
+	@Override
+	public String toString() {
+		return "Vehicle [brand=" + brand + ", model=" + model + ", rentalPricePerDay=" + rentalPricePerDay
+				+ ", isAvailable=" + isAvailable + "]";
+	}
+
 	private String brand;
 	private String model;
 	private double rentalPricePerDay;
@@ -81,9 +87,8 @@ public class Vehicle {
 		return rentalPricePerDay;
 	}
 	
-	public boolean setAvaialble(boolean flag) {
-		this.isAvailable = flag;
-		return isAvailable;
+	public void setAvailable(boolean available) {
+		isAvailable = available;
 	}
 	
 	public String getBrand() {
