@@ -10,12 +10,13 @@ import java.util.List;
 import com.litmus7.vehiclerentalapp.dto.Bike;
 import com.litmus7.vehiclerentalapp.dto.Car;
 import com.litmus7.vehiclerentalapp.dto.Vehicle;
+import com.litmus7.vehiclerentalapp.exceptions.VehicleDataAccessingException;
 
 public class VehicleDao {
 	
 	private List<Vehicle> vehicles = new ArrayList<>();
 	
-	public List<Vehicle>loadVehiclesfromFile(String filePath) throws IOException{
+	public List<Vehicle>loadVehiclesfromFile(String filePath) throws IOException, VehicleDataAccessingException{
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -24,7 +25,9 @@ public class VehicleDao {
 					vehicles.add(vehicle);
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("end");
+			throw new VehicleDataAccessingException("Couldn't load data from :"+ filePath, e);
+		} catch (IOException e) {
+			throw new VehicleDataAccessingException("Couldn't load data from :"+ filePath, e);
 		}
 		return vehicles;
 	}
