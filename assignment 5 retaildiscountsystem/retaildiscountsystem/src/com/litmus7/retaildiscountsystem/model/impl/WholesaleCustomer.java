@@ -13,16 +13,15 @@ import com.litmus7.retaildiscountsystem.model.Discountable;
  */
 public class WholesaleCustomer implements Discountable {
 
-    /**
-     * Applies the discount for a Wholesale customer based on the total purchase amount.
-     * 
-     * @param totalAmount The total purchase amount
-     * @return The amount after applying the applicable discount
-     */
-    @Override
-    public double applyDiscount(double totalAmount) {
-        return totalAmount >= 10000 ? (totalAmount - (totalAmount * 0.15)) 
-                                    : (totalAmount - (totalAmount * 0.1));
-    }
+	/**
+	 * Applies the discount for a Wholesale customer based on the total purchase
+	 * amount.
+	 * 
+	 * @param totalAmount The total purchase amount
+	 * @return The amount after applying the applicable discount
+	 */
+	@Override
+	public double applyDiscount(double totalAmount) {
+		return totalAmount >= 10000 ? (totalAmount - (totalAmount * 0.15)) : (totalAmount - (totalAmount * 0.1));
+	}
 }
-
