@@ -21,7 +21,7 @@ public class RetailStoreController {
 	/** Error status code constant */
 	public static final int ERROR_CODE = 400;
 
-	RetailStoreService service = new RetailStoreService();
+	RetailStoreService reatailStoreService = new RetailStoreService();
 
 	/**
 	 * Finds the discount details for the given customer type and purchase amount.
@@ -35,16 +35,16 @@ public class RetailStoreController {
 	 * @return A Response object containing discount details or an error message
 	 */
 	public Response<String> findDiscountDetails(int customerType, double totalAmount) {
-		Response<String> response = new Response();
+		Response<String> discountResponse = new Response<>();
 
 		if (totalAmount > 0) {
-			response.setData(service.findDiscountDetails(customerType, totalAmount));
-			response.setStatusCode(SUCCESS_CODE);
+			discountResponse.setData(reatailStoreService.findDiscountDetails(customerType, totalAmount));
+			discountResponse.setStatusCode(SUCCESS_CODE);
 		} else {
-			response.setStatusCode(ERROR_CODE);
-			response.setErrorMessage("Purchase amount should be greater than 0");
+			discountResponse.setStatusCode(ERROR_CODE);
+			discountResponse.setErrorMessage("Purchase amount should be greater than 0");
 		}
 
-		return response;
+		return discountResponse;
 	}
 }

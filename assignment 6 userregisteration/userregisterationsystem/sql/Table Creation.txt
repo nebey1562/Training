@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS userdetails;
+
+USE userdetails;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
