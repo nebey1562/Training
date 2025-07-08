@@ -1,4 +1,4 @@
-package com.litmus7.userregisterationsystem.utils;
+package com.litmus7.userregisterationsystem.util;
 
 import java.sql.*;
 import java.util.Properties;

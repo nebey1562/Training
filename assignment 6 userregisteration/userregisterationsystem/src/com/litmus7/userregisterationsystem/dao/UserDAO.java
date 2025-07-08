@@ -7,7 +7,7 @@ import com.litmus7.userregisterationsystem.exception.InvalidEmailException;
 import com.litmus7.userregisterationsystem.exception.InvalidPasswordException;
 import com.litmus7.userregisterationsystem.exception.UserAlreadyExistsException;
 import com.litmus7.userregisterationsystem.exception.UserRegistrationException;
-import com.litmus7.userregisterationsystem.utils.DBUtil;
+import com.litmus7.userregisterationsystem.util.DBUtil;
 
 public class UserDAO {
 
