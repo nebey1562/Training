@@ -1,9 +1,9 @@
 package com.litmus7.userregisterationsystem.controller;
 
 import com.litmus7.userregisterationsystem.service.UserRegistration;
-import com.litmus7.userregistrationsystem.exception.UserRegistrationException;
 import com.litmus7.userregisterationsystem.dto.Response;
 import com.litmus7.userregisterationsystem.dto.User;
+import com.litmus7.userregisterationsystem.exception.UserRegistrationException;
 
 public class UserRegistrationController {
 

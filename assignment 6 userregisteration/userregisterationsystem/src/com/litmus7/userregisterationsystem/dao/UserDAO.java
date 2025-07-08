@@ -2,11 +2,11 @@ package com.litmus7.userregisterationsystem.dao;
 
 import java.sql.*;
 import com.litmus7.userregisterationsystem.dto.User;
-import com.litmus7.userregistrationsystem.exception.InvalidAgeException;
-import com.litmus7.userregistrationsystem.exception.InvalidEmailException;
-import com.litmus7.userregistrationsystem.exception.InvalidPasswordException;
-import com.litmus7.userregistrationsystem.exception.UserAlreadyExistsException;
-import com.litmus7.userregistrationsystem.exception.UserRegistrationException;
+import com.litmus7.userregisterationsystem.exception.InvalidAgeException;
+import com.litmus7.userregisterationsystem.exception.InvalidEmailException;
+import com.litmus7.userregisterationsystem.exception.InvalidPasswordException;
+import com.litmus7.userregisterationsystem.exception.UserAlreadyExistsException;
+import com.litmus7.userregisterationsystem.exception.UserRegistrationException;
 import com.litmus7.userregisterationsystem.utils.DBUtil;
 
 public class UserDAO {
