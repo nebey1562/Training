@@ -5,10 +5,11 @@ import java.util.Scanner;
 import com.litmus7.userregisterationsystem.controller.UserRegistrationController;
 import com.litmus7.userregisterationsystem.dto.Response;
 import com.litmus7.userregisterationsystem.dto.User;
+import com.litmus7.userregisterationsystem.exception.DBConnectionException;
 
 public class UserRegistrationApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 
 		UserRegistrationController userRegistrationController = new UserRegistrationController();
 		Response<User> registrationResponse = new Response<>();

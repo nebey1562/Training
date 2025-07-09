@@ -2,6 +2,9 @@ package com.litmus7.userregisterationsystem.util;
 
 import java.sql.*;
 import java.util.Properties;
+
+import com.litmus7.userregisterationsystem.exception.DBConnectionException;
+
 import java.io.InputStream;
 
 public class DBUtil {
@@ -29,7 +32,12 @@ public class DBUtil {
 		}
 	}
 
-	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+	public static Connection getConnection() throws DBConnectionException {
+		try {
+			return DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+		} catch(SQLException e) {
+			throw new DBConnectionException("Failed to establish DB connection", e);
+		}
+		
 	}
 }

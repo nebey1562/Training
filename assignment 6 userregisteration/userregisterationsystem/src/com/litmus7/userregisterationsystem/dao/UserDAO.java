@@ -1,55 +1,54 @@
 package com.litmus7.userregisterationsystem.dao;
 
-import java.sql.*;
+import static com.litmus7.userregisterationsystem.util.AppConstants.CHECK_SQL;
+import static com.litmus7.userregisterationsystem.util.AppConstants.INSERT_SQL;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import com.litmus7.userregisterationsystem.dto.User;
-import com.litmus7.userregisterationsystem.exception.InvalidAgeException;
-import com.litmus7.userregisterationsystem.exception.InvalidEmailException;
-import com.litmus7.userregisterationsystem.exception.InvalidPasswordException;
+import com.litmus7.userregisterationsystem.exception.DBConnectionException;
 import com.litmus7.userregisterationsystem.exception.UserAlreadyExistsException;
 import com.litmus7.userregisterationsystem.exception.UserRegistrationException;
 import com.litmus7.userregisterationsystem.util.DBUtil;
 
+/**
+ * Data Access Object (DAO) for handling user-related database operations.
+ */
 public class UserDAO {
 
-	public void saveUser(User user) throws UserRegistrationException {
-		try (Connection conn = DBUtil.getConnection()) {
+    /**
+     * Saves a new user to the database after validation.
+     *
+     * @param user the User object to be saved
+     * @throws UserRegistrationException if a validation or persistence error occurs
+     * @throws DBConnectionException if the database connection fails
+     */
+    public void saveUser(User user) throws UserRegistrationException, DBConnectionException {
+        try (Connection connection = DBUtil.getConnection()) {
 
-			if (user.getUsername().trim().isEmpty()) {
-				throw new IllegalArgumentException("Username cannot be empty");
-			}
-			if (user.getAge() < 18 || user.getAge() > 60) {
-				throw new InvalidAgeException("Age must be between 18 and 60.");
-			}
-			if (!user.getEmail().contains("@") || !user.getEmail().contains(".")) {
-				throw new InvalidEmailException("Invalid email format. Must contain '@' and '.'");
-			}
-			if (user.getPassword().length() < 6) {
-				throw new InvalidPasswordException("Password Invalid. Must be at least 6 characters.");
-			}
+            try (PreparedStatement checkStmt = connection.prepareStatement(CHECK_SQL)) {
+                checkStmt.setString(1, user.getEmail());
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        throw new UserAlreadyExistsException("A user with this email already exists.");
+                    }
+                }
+            }
 
-			String checkSql = "SELECT COUNT(*) FROM users WHERE email = ?";
-			try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
-				checkStmt.setString(1, user.getEmail());
-				ResultSet rs = checkStmt.executeQuery();
-				if (rs.next() && rs.getInt(1) > 0) {
-					throw new UserAlreadyExistsException("A user with this email already exists.");
-				}
-			}
+            try (PreparedStatement insertStmt = connection.prepareStatement(INSERT_SQL)) {
+                insertStmt.setString(1, user.getUsername());
+                insertStmt.setInt(2, user.getAge());
+                insertStmt.setString(3, user.getEmail());
+                insertStmt.setString(4, user.getPassword());
+                insertStmt.executeUpdate();
+            }
 
-			String insertSql = "INSERT INTO users (username, age, email, password) VALUES (?, ?, ?, ?)";
-			try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
-				insertStmt.setString(1, user.getUsername());
-				insertStmt.setInt(2, user.getAge());
-				insertStmt.setString(3, user.getEmail());
-				insertStmt.setString(4, user.getPassword());
-				insertStmt.executeUpdate();
-			}
-
-		} catch (IllegalArgumentException | InvalidAgeException | InvalidEmailException | InvalidPasswordException
-				| UserAlreadyExistsException e) {
-			throw new UserRegistrationException(e.getMessage(), e);
-		} catch (Exception e) {
-			throw new UserRegistrationException("An error occurred while registering user.", e);
-		}
-	}
+        } catch (UserAlreadyExistsException e) {
+            throw new UserRegistrationException(e.getMessage(), e);
+        } catch (Exception e) {
+            throw new UserRegistrationException("An error occurred while registering user.", e);
+        }
+    }
 }
