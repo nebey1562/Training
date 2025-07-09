@@ -13,9 +13,6 @@ import com.litmus7.userregisterationsystem.exception.UserAlreadyExistsException;
 import com.litmus7.userregisterationsystem.exception.UserRegistrationException;
 import com.litmus7.userregisterationsystem.util.DBUtil;
 
-/**
- * Data Access Object (DAO) for handling user-related database operations.
- */
 public class UserDAO {
 
     /**
